@@ -37,8 +37,8 @@ class CoreTests(unittest.TestCase):
             def __init__(self):
                 self.calls = []
 
-            def generate_text(self, prompt, image_path=None):
-                self.calls.append((prompt, image_path))
+            def generate_text(self, prompt, image_path=None, max_new_tokens=128):
+                self.calls.append((prompt, image_path, max_new_tokens))
                 if len(self.calls) == 1:
                     return json.dumps([{"id": "c1", "turn": 1,
                         "text": "A red stroller is visible.", "subject": "stroller",
