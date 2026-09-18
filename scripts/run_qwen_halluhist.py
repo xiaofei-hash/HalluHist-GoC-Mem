@@ -153,6 +153,10 @@ def main() -> None:
         "limit": args.limit,
         "selected_samples": len(selected),
         "source_commit": git_commit(root),
+        "source_files_sha256": {
+            str(path.relative_to(root)): sha256(path)
+            for path in sorted((root / "goc_mem").rglob("*.py"))
+        } | {"scripts/run_qwen_halluhist.py": sha256(Path(__file__).resolve())},
         "python": platform.python_version(),
     }
     write_json(args.output / "protocol.json", protocol)
