@@ -1,0 +1,11 @@
+Input: an image and the following atomic claims:
+{claims}
+
+Task: Verify every quoted claim independently using only the image. Do not use one claim as evidence for another.
+
+Labeling rules:
+- SUPPORTED: every key part of the claim is clearly visible.
+- CONTRADICTED: at least one key part is clearly refuted; a visible alternative also constitutes contradiction.
+- UNCERTAIN: the evidence is ambiguous, small, blurry, or occluded; missing detail alone is not a contradiction.
+
+Output: Return only a JSON list with exactly one result for every claim ID. Each result must contain id, label, confidence in [0,1], and a short evidence string.

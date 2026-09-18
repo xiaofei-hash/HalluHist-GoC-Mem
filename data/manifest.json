@@ -1,0 +1,8 @@
+{
+  "benchmark": "HalluHist",
+  "pairs": 500,
+  "inputs": 1000,
+  "images": 500,
+  "evaluation_inputs_sha256": "328189db7606af943958ae80467dbe3ed9e27162acc8c221e83d366d8802b03d",
+  "evaluation_labels_sha256": "b5b5a64749b663dc0c053106a420dcf93b1ddceadee526a543a2d89f5f8bd3f1"
+}

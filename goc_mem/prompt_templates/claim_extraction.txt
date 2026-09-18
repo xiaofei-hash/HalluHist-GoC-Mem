@@ -1,0 +1,16 @@
+Input: dialogue history and final question.
+
+Dialogue history:
+{history}
+
+Final question:
+{question}
+
+Task: Extract all distinct atomic visual claims from the assistant answers in the dialogue history within the generation-token budget.
+
+Requirements:
+1. Recover complete claims from short answers, resolve pronouns to recent visual entities where possible, and preserve each source turn.
+2. Use the final question only to prioritize influential claims; never extract a claim from the final question itself.
+3. Assign one type from existence, attribute, relation, action, or counting.
+
+Output: Return only a JSON list. Each claim must contain exactly these fields: id, turn, text, subject, relation, object, and type.
