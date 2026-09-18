@@ -41,13 +41,15 @@ def parse_claims(raw):
         required = ("id", "turn", "text", "subject", "relation", "object", "type")
         if any(k not in item for k in required):
             raise ValueError("Missing claim fields")
+        item = dict(item)
+        if isinstance(item["turn"], str) and item["turn"].strip().isdigit():
+            item["turn"] = int(item["turn"].strip())
         if not isinstance(item["id"], (str, int)) or isinstance(item["id"], bool):
             raise ValueError("Expected a string or integer claim ID")
         if any(not isinstance(item[k], str) for k in required if k not in {"id", "turn"}):
             raise ValueError("Expected string claim fields")
         if type(item['turn']) is not int or item['turn'] < 1:
             raise ValueError("Invalid source turn")
-        item = dict(item)
         item['id'] = str(item['id'])
         if not item['id'] or item['id'] in seen or not item['text'].strip():
             raise ValueError("Duplicate ID or empty claim")
