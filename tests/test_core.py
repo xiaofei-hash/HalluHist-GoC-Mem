@@ -11,6 +11,13 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(normalize_label("CONTRADICTED", 0.6, 0.6), "CONTRADICTED")
         self.assertEqual(normalize_label("UNCERTAIN", 0.99, 0.6), "UNCERTAIN")
 
+    def test_numeric_claim_id_is_normalized(self):
+        from goc_mem.core import parse_claims
+        raw = json.dumps([{"id": 1, "turn": 1, "text": "A dog is visible.",
+                           "subject": "dog", "relation": "exists", "object": "yes",
+                           "type": "existence"}])
+        self.assertEqual(parse_claims(raw)[0].id, "1")
+
     def test_existence_cascade(self):
         claims = [Claim("c1", 1, "A red stroller is present.", "stroller", "exists", "yes", "existence"),
                   Claim("c2", 2, "The stroller carries a child.", "stroller", "carries", "child", "action")]
