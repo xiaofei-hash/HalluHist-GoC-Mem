@@ -1,18 +1,6 @@
-Input: image, current question, and reconstructed memory.
+Use the context to understand the question and resolve references.
+Base your answer on visual evidence.
 
-Instruction: Answer the visual question concisely, treating the image as the primary evidence. Use the reconstructed memory only when relevant and consistent with the image.
+Use a single word or short phrase whenever possible.
 
-[Supported facts]
-{supported}
-Use these as factual memory only when they remain consistent with the image.
-
-[Uncertain claims]
-{uncertain}
-Treat these as unverified context and do not assert them as facts without direct visual support.
-
-[Corrections]
-{corrections}
-Do not rely on these premises; correct a false premise when it affects the current question.
-
-Question: {question}
-Answer with Yes or No.
+{history_sections}Question: {question}

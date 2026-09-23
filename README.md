@@ -34,7 +34,7 @@ The backend-neutral pipeline implements the method described in the paper:
 3. use `tau_c` only to normalize low-confidence supported/contradicted labels
    to `UNCERTAIN`;
 4. remove contradicted seeds and their dependency descendants;
-5. render supported facts, uncertain claims, and query-relevant corrections;
+5. render supported facts and qualified uncertain claims; retain corrections only in diagnostics;
 6. answer the final question using the image and reconstructed memory.
 
 `goc_mem.pipeline.Backend` is the only model-specific interface. Implement
@@ -55,6 +55,29 @@ paper's Prompt Design section:
 - [`claim_extraction.txt`](goc_mem/prompt_templates/claim_extraction.txt)
 - [`image_verification.txt`](goc_mem/prompt_templates/image_verification.txt)
 - [`memory_guided_answering.txt`](goc_mem/prompt_templates/memory_guided_answering.txt)
+
+### Answering-template update (2026-09-23)
+
+The answering prompt now begins:
+
+```text
+Use the context to understand the question and resolve references.
+Base your answer on visual evidence.
+```
+
+See [the expanded template](prompts/memory_guided_answering.txt). Supported
+claims appear as quoted `Verified history`; uncertain claims retain their
+verification confidence and the `Uncertain history` qualification. Empty
+sections are omitted independently. Corrections are retained in diagnostics
+but are not rendered in the revised answer prompt. The answer instruction
+requests a single word or short phrase, rather than forcing every task to Yes/No.
+
+This update synchronizes answer-prompt rendering. The backend-neutral core
+on this branch still verifies all claims and has no memory budget (as described
+above); it is not the frozen, budgeted Qwen controller used in the manuscript's
+answer-only reruns. Updating the prompt alone does not establish reproduction
+of those experimental scores. Existing output files are historical; use a fresh
+output directory for runs with this template.
 
 ## Setup and checks
 

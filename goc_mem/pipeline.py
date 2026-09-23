@@ -100,7 +100,8 @@ def run_sample(sample, backend, tau_c=0.6, cascade=True):
 
     seeds = {claim_id for claim_id, label in labels.items() if label == "CONTRADICTED"}
     removed = prune(edges, seeds, cascade=cascade)
-    memory = reconstruct(nodes, labels, removed, question)
+    memory = reconstruct(nodes, labels, removed, question,
+                         confidences={row['id']: row.get('confidence') for row in verification})
     answer_prompt = answering_prompt(question, memory)
     answer = backend.generate_text(answer_prompt, image_path=image_path, max_new_tokens=32)
     return {

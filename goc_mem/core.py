@@ -150,10 +150,12 @@ def relevant_ids(question, claims):
     return hits or {c.id for c in claims}
 
 
-def reconstruct(nodes, labels, removed, question):
+def reconstruct(nodes, labels, removed, question, confidences=None):
     historical = [c for c in nodes if not c.auxiliary]
     relevant = relevant_ids(question, historical)
     memory = {'supported': [], 'uncertain': [], 'corrections': []}
+    if confidences is not None:
+        memory['uncertain_confidences'] = []
     for c in historical:
         if c.id not in relevant:
             continue
@@ -165,6 +167,8 @@ def reconstruct(nodes, labels, removed, question):
             memory['supported'].append(c.text)
         elif label == 'UNCERTAIN':
             memory['uncertain'].append(c.text)
+            if confidences is not None:
+                memory['uncertain_confidences'].append(confidences.get(c.id))
     return memory
 
 
