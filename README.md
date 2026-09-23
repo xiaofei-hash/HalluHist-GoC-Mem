@@ -27,7 +27,7 @@ Image files come from GQA and are downloaded separately. See
 
 ## GoC-Mem core
 
-The backend-neutral pipeline implements the method described in the paper:
+The backend-neutral pipeline provides the core claim-graph operations:
 
 1. extract all atomic visual claims from historical assistant responses;
 2. add and verify missing existence anchors together with all extracted claims;
@@ -42,10 +42,18 @@ The backend-neutral pipeline implements the method described in the paper:
 then call `goc_mem.pipeline.run_sample`. The default threshold is supplied by
 the caller (`tau_c=0.6` in the paper).
 
-The implementation verifies every extracted claim and auxiliary anchor and
-does not impose a claim-count or character-length limit during reconstruction.
-It constructs only explicit entity-existence prerequisite edges; temporal
+It constructs explicit entity-existence prerequisite edges; temporal
 adjacency alone does not create a dependency.
+
+### Release scope and paper configuration
+
+This release provides the backend-neutral core and updated answering template.
+The paper's Qwen experiment controller uses separate selection and rendering
+budgets: at most 8 verified nodes and at most 4 historical claims / 800 characters
+in the final memory. The public core verifies all extracted claims and auxiliary
+anchors and renders memory without these limits. The frozen controller used for
+the paper's answer-only reruns is not included in this release; the updated
+template alone is therefore not a complete reproduction configuration.
 
 ## Prompts
 
@@ -72,12 +80,9 @@ sections are omitted independently. Corrections are retained in diagnostics
 but are not rendered in the revised answer prompt. The answer instruction
 requests a single word or short phrase, rather than forcing every task to Yes/No.
 
-This update synchronizes answer-prompt rendering. The backend-neutral core
-on this branch still verifies all claims and has no memory budget (as described
-above); it is not the frozen, budgeted Qwen controller used in the manuscript's
-answer-only reruns. Updating the prompt alone does not establish reproduction
-of those experimental scores. Existing output files are historical; use a fresh
-output directory for runs with this template.
+Use a fresh output directory when running the updated template. For the
+relationship to the paper's experimental configuration, see
+[Release scope and paper configuration](#release-scope-and-paper-configuration).
 
 ## Setup and checks
 
