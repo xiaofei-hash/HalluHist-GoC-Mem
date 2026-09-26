@@ -1,12 +1,14 @@
 cff-version: 1.2.0
 message: "If you use HalluHist or GoC-Mem, please cite this work."
-title: "GoC-Mem: Benchmarking and Mitigating Hallucination Snowballing in Multi-Turn Multimodal Dialogue"
+title: "GoC-Mem: Dependency-Aware Memory Revision and Paired-History Benchmarking for Multimodal Hallucination Snowballing"
 type: article
 authors:
   - family-names: Wu
     given-names: Mengfei
-  - family-names: Zheng
-    given-names: Yuhui
+  - family-names: Shi
+    given-names: Hao
   - family-names: Wu
     given-names: Xia
+  - family-names: Zheng
+    given-names: Yuhui
 year: 2026

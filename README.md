@@ -1,4 +1,8 @@
-# HalluHist and GoC-Mem
+# GoC-Mem: Dependency-Aware Memory Revision and Paired-History Benchmarking for Multimodal Hallucination Snowballing
+
+**Authors:** Mengfei Wu, Hao Shi, Xia Wu, and Yuhui Zheng.
+
+**Corresponding author:** Yuhui Zheng (`zhengyh@vip.126.com`).
 
 This repository contains HalluHist, a paired-history benchmark for multimodal
 hallucination snowballing, and the core implementation of GoC-Mem, a
@@ -96,8 +100,8 @@ python scripts/validate_dataset.py
 
 ```bibtex
 @article{wu2026gocmem,
-  title   = {GoC-Mem: Benchmarking and Mitigating Hallucination Snowballing in Multi-Turn Multimodal Dialogue},
-  author  = {Wu, Mengfei and Zheng, Yuhui and Wu, Xia},
+  title   = {GoC-Mem: Dependency-Aware Memory Revision and Paired-History Benchmarking for Multimodal Hallucination Snowballing},
+  author  = {Wu, Mengfei and Shi, Hao and Wu, Xia and Zheng, Yuhui},
   year    = {2026}
 }
 ```
