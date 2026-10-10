@@ -49,16 +49,6 @@ the caller (`tau_c=0.6` in the paper).
 It constructs explicit entity-existence prerequisite edges; temporal
 adjacency alone does not create a dependency.
 
-### Release scope and paper configuration
-
-This release provides the backend-neutral core and updated answering template.
-The paper's Qwen experiment controller uses separate selection and rendering
-budgets: at most 8 verified nodes and at most 4 historical claims / 800 characters
-in the final memory. The public core verifies all extracted claims and auxiliary
-anchors and renders memory without these limits. The frozen controller used for
-the paper's answer-only reruns is not included in this release; the updated
-template alone is therefore not a complete reproduction configuration.
-
 ## Prompts
 
 The files in `goc_mem/prompt_templates/` are the executable templates corresponding to the
@@ -84,9 +74,7 @@ sections are omitted independently. Corrections are retained in diagnostics
 but are not rendered in the revised answer prompt. The answer instruction
 requests a single word or short phrase, rather than forcing every task to Yes/No.
 
-Use a fresh output directory when running the updated template. For the
-relationship to the paper's experimental configuration, see
-[Release scope and paper configuration](#release-scope-and-paper-configuration).
+Use a fresh output directory when running the updated template.
 
 ## Setup and checks
 
